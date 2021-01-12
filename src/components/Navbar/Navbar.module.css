@@ -1,0 +1,17 @@
+.nav {
+  grid-area: n;
+  background-color: purple;
+  padding: 20px;
+}
+
+.item {
+  color: rosybrown;
+}
+.item a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.item a.active {
+  color: aqua;
+}
