@@ -6,7 +6,12 @@ const Profile = (props) => {
   return (
     <div>
       <ProfileInfo source="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png" />
-      <MyPosts posts={props.state.postsData} addPost={props.addPost} />
+      <MyPosts
+        posts={props.profilePage.postsData}
+        newPostText={props.profilePage.newPostText}
+        addPost={props.addPost}
+        updateNewPost={props.updateNewPost}
+      />
     </div>
   );
 };
