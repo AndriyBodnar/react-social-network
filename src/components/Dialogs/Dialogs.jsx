@@ -11,11 +11,11 @@ import {
 const Dialogs = (props) => {
   let state = props.dialogsPage;
   let dialogsElement = state.dialogs.map((d) => (
-    <DialogItem name={d.name} id={d.id} />
+    <DialogItem name={d.name} id={d.id} key={d.id} />
   ));
 
-  let messageElement = state.messagesData.map((el) => (
-    <Message text={el.message} />
+  let messageElement = state.messages.map((el) => (
+    <Message text={el.message} key={el.id} />
   ));
 
   let newMessageBody = state.newMessageBody;
@@ -24,9 +24,9 @@ const Dialogs = (props) => {
     props.sendMessage();
   };
   let onNewMessageSend = (e) => {
+    debugger;
     let body = e.target.value;
     props.updNewMessageBody(body);
-    
   };
   // console.log(messageElement);
 

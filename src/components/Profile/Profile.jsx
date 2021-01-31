@@ -7,7 +7,7 @@ const Profile = (props) => {
     <div>
       <ProfileInfo source="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png" />
       <MyPostsContainer
-      store={props.store}
+      // store={props.store}
         // posts={props.profilePage.postsData}
         // newPostText={props.profilePage.newPostText}
         // dispatch={props.dispatch}
