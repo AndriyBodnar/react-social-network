@@ -8,30 +8,34 @@ import {
   setUsersTotalCount,
   toggleIsFetching,
   toggleIsFollowingProgress,
+  getUsersThunk,
 } from "../../redux/usersReducer";
 
 import Users from "./Users";
 import Preloader from "../common/preloader/preloader";
 import { getUsers } from "../../api/api";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 // import UsersAPIComponent from "./UsersAPIComponent";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.toggleIsFetching(true);
-    getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
-      this.props.toggleIsFetching(false);
-      this.props.setUsers(data.items);
-      this.props.setUsersTotalCount(data.totalCount);
-    });
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
+    // this.props.toggleIsFetching(true);
+    // getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
+    //   this.props.toggleIsFetching(false);
+    //   this.props.setUsers(data.items);
+    //   this.props.setUsersTotalCount(data.totalCount);
+    // });
   }
   onPageChanged = (pageNumber) => {
-    this.props.setCurrentPage(pageNumber);
-    this.props.toggleIsFetching(true);
-    getUsers(pageNumber, this.props.pageSize).then((data) => {
-      this.props.toggleIsFetching(false);
-      this.props.setUsers(data.items);
-      // this.props.setTotalUsersCount(response.data.count);
-    });
+    this.props.getUsers(pageNumber, this.props.pageSize);
+    // this.props.setCurrentPage(pageNumber);
+    // this.props.toggleIsFetching(true);
+    // getUsers(pageNumber, this.props.pageSize).then((data) => {
+    //   this.props.toggleIsFetching(false);
+    //   this.props.setUsers(data.items);
+    //   // this.props.setTotalUsersCount(response.data.count);
+    // });
   };
   render() {
     return (
@@ -45,7 +49,7 @@ class UsersContainer extends React.Component {
           users={this.props.users}
           follow={this.props.follow}
           unfollow={this.props.unfollow}
-          toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
+          // toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
           followingInProgress={this.props.followingInProgress}
         />
       </>
@@ -86,15 +90,20 @@ let mapStateToProps = (state) => {
 //   };
 // };
 
-export default connect(mapStateToProps, {
-  follow,
-  unfollow,
-  setUsers,
-  setCurrentPage,
-  setUsersTotalCount,
-  toggleIsFetching,
-  toggleIsFollowingProgress,
-})(UsersContainer);
+// let withUsersRedirect = withAuthRedirect(UsersContainer);
+
+export default withAuthRedirect(
+  connect(mapStateToProps, {
+    follow,
+    unfollow,
+    // setUsers,
+    setCurrentPage,
+    // setUsersTotalCount,
+    // toggleIsFetching,
+    toggleIsFollowingProgress,
+    getUsers: getUsersThunk,
+  })(UsersContainer)
+);
 
 // let name = 5;
 // let nameobj = {

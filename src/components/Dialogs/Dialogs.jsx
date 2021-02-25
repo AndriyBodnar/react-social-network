@@ -7,6 +7,7 @@ import {
   sendMessageCreator,
   updNewMessageBodyCreator,
 } from "../../redux/dialogsReducer";
+import { Redirect } from "react-router-dom";
 
 const Dialogs = (props) => {
   let state = props.dialogsPage;
@@ -24,12 +25,13 @@ const Dialogs = (props) => {
     props.sendMessage();
   };
   let onNewMessageSend = (e) => {
-    debugger;
     let body = e.target.value;
     props.updNewMessageBody(body);
   };
   // console.log(messageElement);
-
+  if (!props.isAuth) {
+    return <Redirect to={`/login`} />;
+  }
   return (
     <div className={s.dialogs}>
       <div className={s.dialogItems}>{dialogsElement}</div>
@@ -49,5 +51,8 @@ const Dialogs = (props) => {
     </div>
   );
 };
+
+
+
 
 export default Dialogs;
