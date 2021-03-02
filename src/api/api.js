@@ -27,7 +27,19 @@ export const unfollowUser = (id) => {
 };
 
 export const getProfile = (id) => {
-  return instance.get(`profile/${id}`);
+  return profileAPI.getProfile(id);
+};
+
+export const profileAPI = {
+  getProfile(id) {
+    return instance.get(`profile/${id}`);
+  },
+  getStatus(id) {
+    return instance.get(`profile/status/${id}`);
+  },
+  updateStatus(status) {
+    return instance.put(`profile/status`, { status: status });
+  },
 };
 
 // axios

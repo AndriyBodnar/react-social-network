@@ -10,6 +10,7 @@ import Dialogs from "./Dialogs";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 // const DialogsContainer = (props) => {
 //   // console.log(messageElement);
 
@@ -37,25 +38,31 @@ import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 let mapStateToProps = (state) => {
   return {
     dialogsPage: state.dialogsPage,
-    
   };
 };
 let mapDispatchToProps = (dispatch) => {
   return {
-    sendMessage: () => {
-      dispatch(sendMessageCreator());
+    sendMessage: (newMessageBody) => {
+      dispatch(sendMessageCreator(newMessageBody));
     },
-    updNewMessageBody: (body) => {
-      dispatch(updNewMessageBodyCreator(body));
-    },
+    // updNewMessageBody: (body) => {
+    //   dispatch(updNewMessageBodyCreator(body));
+    // },
   };
 };
+// compose(
+//   connect(mapStateToProps, mapDispatchToProps),
+//   withAuthRedirect
+// )(Dialogs);
 
-let AuthRedirectComponent = withAuthRedirect(Dialogs);
+// let AuthRedirectComponent = withAuthRedirect(Dialogs);
 
-const DialogsContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AuthRedirectComponent);
+// const DialogsContainer = connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(AuthRedirectComponent);
 
-export default DialogsContainer;
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect
+)(Dialogs);

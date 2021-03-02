@@ -1,4 +1,4 @@
-const UPD_NEW_MESSAGE = "UPDATE-NEW-POST-MESSAGE";
+// const UPD_NEW_MESSAGE = "UPDATE-NEW-POST-MESSAGE";
 const SEND_MESSAGE = "SEND-NEW-POST-MESSAGE";
 
 let initialState = {
@@ -16,16 +16,15 @@ let initialState = {
     { id: 4, message: "Hello! How are you?4" },
     { id: 5, message: "Hello! How are you?5" },
   ],
-  newMessageBody: "",
 };
 
 const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPD_NEW_MESSAGE:
-      return { ...state, newMessageBody: action.body };
+    // case UPD_NEW_MESSAGE:
+    //   return { ...state, newMessageBody: action.body };
 
     case SEND_MESSAGE:
-      let body = state.newMessageBody;
+      let body = action.newMessageBody;
       return {
         ...state,
         newMessageBody: "",
@@ -36,15 +35,16 @@ const dialogsReducer = (state = initialState, action) => {
       return state;
   }
 };
-export const sendMessageCreator = () => ({
+export const sendMessageCreator = (newMessageBody) => ({
   type: SEND_MESSAGE,
+  newMessageBody,
 });
 
-export const updNewMessageBodyCreator = (body) => {
-  return {
-    type: UPD_NEW_MESSAGE,
-    body: body,
-  };
-};
+// export const updNewMessageBodyCreator = (body) => {
+//   return {
+//     type: UPD_NEW_MESSAGE,
+//     body: body,
+//   };
+// };
 
 export default dialogsReducer;
