@@ -43,12 +43,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updNewMessageBody: (text) => {
-      let action = updNewPostActionCreator(text);
-      dispatch(action);
-    },
-    addPost: () => {
-      dispatch(addPostActionCreator());
+    // updNewMessageBody: (text) => {
+    //   let action = updNewPostActionCreator(text);
+    //   dispatch(action);
+    // },
+    addPost: (newPostBody) => {
+      dispatch(addPostActionCreator(newPostBody));
     },
   };
 };
