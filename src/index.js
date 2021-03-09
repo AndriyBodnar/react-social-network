@@ -6,14 +6,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { BrowserRouter, Route } from "react-router-dom";
+import { HashRouter, Route } from "react-router-dom";
 
 import { Provider } from "react-redux";
 
 // let rerenderEntireTree = () => {
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <Provider store={store}>
         <App
         // state={state}
@@ -21,7 +21,7 @@ ReactDOM.render(
         // store={store}
         />
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );

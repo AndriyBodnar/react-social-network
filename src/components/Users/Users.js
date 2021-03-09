@@ -4,28 +4,24 @@ import styles from "./users.module.css";
 import { NavLink } from "react-router-dom";
 
 import { followUser, unfollowUser } from "../../api/api";
-let Users = (props) => {
-  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-
-  let pages = [];
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
-  }
-
+import Paginator from "../common/Paginator/Paginator";
+let Users = ({
+  currentPage,
+  onPageChanged,
+  totalUsersCount,
+  pageSize,
+  ...props
+}) => {
+ 
   return (
     <div>
-      <div>
-        {pages.map((p) => {
-          return (
-            <span
-              className={props.currentPage === p && styles.selectedPage}
-              onClick={(e) => props.onPageChanged(p)}
-            >
-              {p}
-            </span>
-          );
-        })}
-      </div>
+      <Paginator
+        currentPage={currentPage}
+        onPageChanged={onPageChanged}
+        totalItemsCount={totalUsersCount}
+        pageSize={pageSize}
+      />
+
       {/* <button onClick={this.getUsers}>Get users</button> */}
       {props.users.map((u) => (
         <div key={u.id}>
